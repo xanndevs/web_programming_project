@@ -2,12 +2,12 @@
 *.pyc
 __pycache__/
 
-# Virtual environment folder
+# Virtual environment folder#
 venv/
 
 # Environment variables file
 .env
-.flaskenv
+#.flaskenv
 
 # Database files
 *.db
