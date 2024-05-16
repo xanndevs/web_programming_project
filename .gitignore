@@ -1,0 +1,30 @@
+# Python bytecode files
+*.pyc
+__pycache__/
+
+# Virtual environment folder
+venv/
+
+# Environment variables file
+.env
+.flaskenv
+
+# Database files
+*.db
+*.sqlite3
+
+# Flask-Migrate migration files
+migrations/
+
+# Pytest cache
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Logs
+*.log
