@@ -32,12 +32,6 @@ def index():
     return render_template('index.html', title='Home', content="AZAAAAAAAAAAAAAA", videoID="jvid")
 
 
-@app.route("/aglaindex")
-def aindex():
-    users = Show.query.all()
-    user = users[0]
-    return str(user.id) + "<br>" + user.title + "<br>" + user.description
-
 
 @app.route("/add-show", methods=["GET", "POST"])
 def add_show():
