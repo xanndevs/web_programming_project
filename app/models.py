@@ -24,8 +24,7 @@ class Episode(db.Model):
     __tablename__ = 'episode'
     
     id = db.Column(db.Integer, primary_key=True)
-    episode_id = db.Column(db.String, nullable=False)
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=True)
-    show_id = db.Column(db.Integer, db.ForeignKey('show.id'), nullable=False)
     episode_video = db.Column(db.String, nullable=False)
+    show_id = db.Column(db.Integer, db.ForeignKey('show.id'), nullable=False)

@@ -7,6 +7,7 @@ from app.models import Show
 from app.models import Episode
 from app import db
 
+from datetime import datetime
 
 
 
@@ -87,40 +88,33 @@ def uploaded_file(filename):
 @app.route("/add-episode", methods=["GET", "POST"])
 def add_episode():
     if request.method == 'POST':
+        shows = Show.query.all()
+        shows_dict = {show.id: show.show_name for show in shows}
+
         form_data = request.form
         files = request.files.getlist("video")
 
-        saved_files = []
         file = files[0]
+        new_filename = ""
         if file and allowed_video(file.filename):
-            filename = file.filename
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(filepath)
-            saved_files.append(filename)
+            current_date = datetime.now()
+            formatted_date = current_date.strftime("%m_%d_%Y")
 
+            new_filename = shows_dict.get(int(form_data.get('show-id')))+"_Video_"+formatted_date+"."+file.filename.split(".")[-1]
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
+            file.save(filepath)
 
         # Commit the values to the DB.
-        new_show = Episode(
-            show_name = form_data.get("title"),
-            show_description = form_data.get("description"),
-            show_thumbnail = file.filename
+        new_episode = Episode(
+            title = form_data.get("title"),
+            description = form_data.get("description"),
+            episode_video = new_filename,
+            show_id = form_data.get('show-id')
         )
-        db.session.add(new_show)
+        db.session.add(new_episode)
         db.session.commit()
 
-        # Generate HTML to display form data and images
-        result = f"<h1>Received Form Data:</h1><ul>"
-        for key, value in form_data.items():
-            result += f"<li>{key}: {value}</li>"
-        result += "</ul>"
-
-        if saved_files:
-            result += "<h2>Uploaded Images:</h2>"
-            for filename in saved_files:
-                vid_url = url_for('uploaded_file', filename=filename)
-                result += f'<div><video alt="{filename}" style="max-width:200px;"><source src="{vid_url}" type="video/{filename.split(".")[-1]}"></video><p>{filename}</p></div>'
-        
-        return result
+        return "Episode have been successfully uploaded!"
     else:
         shows = Show.query.all()
         shows_dict = {show.id: show.show_name for show in shows}
