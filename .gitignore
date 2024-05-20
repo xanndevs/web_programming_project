@@ -28,3 +28,5 @@ migrations/
 
 # Logs
 *.log
+
+uploads/*
