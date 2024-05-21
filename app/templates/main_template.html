@@ -1,0 +1,65 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {{title}} </title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script>
+        function codeAddress() {
+            htmlString = document.getElementById("main").innerHTML;
+
+            htmlString = htmlString.replace(/&lt;/g, '<');
+            htmlString = htmlString.replace(/&gt;/g, '>');
+
+            document.getElementById("main").innerHTML = htmlString;
+        }
+        window.onload = codeAddress;
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/normal-logo.png') }}" alt="Logo" style="width:auto;">
+            </div>
+            <div class="search-bar">
+
+                <div class="dropdown-searchable">
+
+                    <select name="show-id" id="dropdown" size="5">
+                        {% for id, name in autofill_data.items() %}
+                        <option onclick="window.location.href = '{{url_for('show_page',show_id=id)}}'">{{name}}</option>
+                        {% endfor %}
+
+                    </select>
+                    <input type="text" id="search" placeholder="Search..." autocomplete="false">
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="240px" height="240px">
+                            <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+            <div class="hamburger-button"></div>
+        </div>
+        <div class="content-panel">
+            <main id="main">
+                {{ content }}
+            </main>
+        </div>
+        <div class="right-panel"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/add-episode-searchabledropdown.js') }}"></script>
+
+
+</body>
+
+</html>

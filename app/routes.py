@@ -30,7 +30,9 @@ def allowed_video(filename):
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home', content="AZAAAAAAAAAAAAAA", videoID="jvid")
+    shows = Show.query.all()
+    shows_dict = {show.id: show.show_name for show in shows}
+    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content="THERE WILL BE CONTENT")
 
 
 
@@ -120,3 +122,9 @@ def add_episode():
 
 
 
+@app.route("/show", methods=["GET", "POST"])
+def show_page():
+    shows = Show.query.all()
+    shows_dict = {show.id: show.show_name for show in shows}
+    main_html = render_template('add-show.html', title='Home', content="AZAAAAAAAAAAAAAA", videoID="jvid")
+    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html)

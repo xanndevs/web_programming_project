@@ -13,15 +13,18 @@ $(document).ready(function () {
 
     // Filter options based on search input
     $('#search').on('keyup', function () {
+        var counter=0;
         var searchText = $(this).val().toLowerCase();
         $('#dropdown option').each(function () {
             var optionText = $(this).text().toLowerCase();
             if (optionText.indexOf(searchText) > -1) {
                 $(this).show();
+                counter++;
             } else {
                 $(this).hide();
             }
         });
+        $('#dropdown').attr('size', counter);
     });
 
     // Optional: Hide the dropdown when an option is clicked
