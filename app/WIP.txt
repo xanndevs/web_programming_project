@@ -1,7 +1,1 @@
-sqle kaydetme işini hallet
-
-https://chatgpt.com/share/f88a4cb8-fac3-4c3d-83a9-2d9e4f9ee47f
-
-veri tabanınındaki show thumbnail ismini episode name ile eşleştir
-
 anasayfa, video izleme sayfası, anasayfa search-bar (episode ekleden çal)
