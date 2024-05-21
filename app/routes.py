@@ -37,40 +37,35 @@ def index():
 @app.route("/add-show", methods=["GET", "POST"])
 def add_show():
     if request.method == 'POST':
+
         form_data = request.form
         files = request.files.getlist("thumbnail")
 
-        saved_files = []
         file = files[0]
+        new_filename = ""
         if file and allowed_file(file.filename):
-            filename = file.filename
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            
+            current_date = datetime.now()
+            formatted_date = current_date.strftime("%H_%M_%S")
+
+            new_filename = form_data.get("title")+"_Thumbnail_"+formatted_date+"."+file.filename.split(".")[-1]
+            new_filename = new_filename.replace(" ","_")
+
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
             file.save(filepath)
-            saved_files.append(filename)
 
 
         # Commit the values to the DB.
         new_show = Show(
             show_name = form_data.get("title"),
             show_description = form_data.get("description"),
-            show_thumbnail = file.filename
+            show_thumbnail = new_filename
         )
         db.session.add(new_show)
         db.session.commit()
 
-        # Generate HTML to display form data and images
-        result = f"<h1>Received Form Data:</h1><ul>"
-        for key, value in form_data.items():
-            result += f"<li>{key}: {value}</li>"
-        result += "</ul>"
-
-        if saved_files:
-            result += "<h2>Uploaded Images:</h2>"
-            for filename in saved_files:
-                img_url = url_for('uploaded_file', filename=filename)
-                result += f'<div><img src="{img_url}" alt="{filename}" style="max-width:200px;"><p>{filename}</p></div>'
-        
-        return result
+  
+        return "Show have been successfully added!"
     else:
         return render_template('add-show.html', title='Home', content="AZAAAAAAAAAAAAAA", videoID="jvid")
 
@@ -98,9 +93,11 @@ def add_episode():
         new_filename = ""
         if file and allowed_video(file.filename):
             current_date = datetime.now()
-            formatted_date = current_date.strftime("%m_%d_%Y")
+            formatted_date = current_date.strftime("%H_%M_%S")
 
-            new_filename = shows_dict.get(int(form_data.get('show-id')))+"_Video_"+formatted_date+"."+file.filename.split(".")[-1]
+            new_filename = shows_dict.get(int(form_data.get('show-id')))+"_"+form_data.get('title')+"_Video_"+formatted_date+"."+file.filename.split(".")[-1]
+            new_filename = new_filename.replace(" ","_")
+
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
             file.save(filepath)
 
