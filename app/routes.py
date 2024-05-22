@@ -8,21 +8,16 @@ from app.models import Episode
 from app import db
 
 from datetime import datetime
-
-
-
+import sys
 #app.config['UPLOAD_FOLDER'] = '/uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['ALLOWED_VIDEO_EXTENSIONS'] = {'mp4', 'mkv', 'hvec', 'avi', 'webm', 'mov'}
 
-
 # Ensure the upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
-
 def allowed_video(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_VIDEO_EXTENSIONS']
 
@@ -32,7 +27,51 @@ def allowed_video(filename):
 def index():
     shows = Show.query.all()
     shows_dict = {show.id: show.show_name for show in shows}
-    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content="THERE WILL BE CONTENT")
+    all_dict = {show.id: [show.show_name, show.show_thumbnail, show.show_description] for show in shows}
+    main_page = render_template('content/index.html', content=all_dict)
+    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_page)
+
+
+@app.route("/show/", methods=["GET", "POST"])
+@app.route("/show/<show_id>", methods=["GET", "POST"])
+def show_page(show_id):
+    shows = Show.query.all()
+    shows_dict = {show.id: show.show_name for show in shows}
+
+    show_data = db.session.query(Show).filter(Show.id == show_id).first()
+    print(show_id, file=sys.stderr)
+
+
+    main_html = render_template('content/show_info.html', data_list=show_data)
+    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -71,7 +110,7 @@ def add_show():
     else:
         return render_template('add-show.html', title='Home', content="AZAAAAAAAAAAAAAA", videoID="jvid")
 
-
+@app.route('/uploads/')
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
@@ -119,12 +158,3 @@ def add_episode():
         shows_dict = {show.id: show.show_name for show in shows}
         return render_template('add-episode.html', title='Add Episode', autofill_data=shows_dict)
 
-
-
-
-@app.route("/show", methods=["GET", "POST"])
-def show_page():
-    shows = Show.query.all()
-    shows_dict = {show.id: show.show_name for show in shows}
-    main_html = render_template('add-show.html', title='Home', content="AZAAAAAAAAAAAAAA", videoID="jvid")
-    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html)

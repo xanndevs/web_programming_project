@@ -58,13 +58,13 @@ body {
 
     /* Generated Code */
     display: grid;
-    grid-template-columns: 3fr 3fr 2fr;
+    grid-template-columns: 3fr 3fr 0px 400px;
     grid-template-rows: 125px 1fr;
     gap: 0px 50px;
     grid-auto-flow: row;
     grid-template-areas:
-        "top-bar top-bar top-bar"
-        "content-panel content-panel right-panel";
+        "top-bar top-bar top-bar top-bar"
+        "content-panel content-panel gap right-panel";
 }
 
 .top-bar {
@@ -110,7 +110,7 @@ body {
 /* Main Layout Styling */
 
 .content-panel {
-    background-color: red;
+    background-color: gainsboro;
 }
 
 .search-bar {
@@ -211,5 +211,113 @@ body {
     padding: 20px 10px;
     font-size: 1.2em;
     font-family: system-ui, 'Segoe UI', 'Open Sans', 'Helvetica Neue';
+
+}
+
+
+
+
+
+
+
+
+
+
+/* Show details page styling */
+
+
+
+.show_container {
+    display: grid;
+    position: relative;
+    grid-template-columns: 560px 1fr;
+    grid-template-rows: 75px 675px auto;
+    gap: 0px 20px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "show-title show-title"
+        "show-thumbnail show-description"
+        "show-episodes show-episodes";
+}
+
+.show-title {
+    grid-area: show-title;
+    position: relative;
+}
+
+.show-thumbnail {
+    grid-area: show-thumbnail;
+    position: relative;
+}
+
+.show-description {
+    grid-area: show-description;
+    position: relative;
+
+    padding-right: 50px;
+}
+
+.show-episodes {
+    grid-area: show-episodes;
+    position: relative;
+}
+
+.show-title > p{
+    width: 100%;
+    height: min-content;
+    text-align: left;
+    text-indent: 50px;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    font-size: 25px;
+}
+
+.show-thumbnail > img{
+    height: 100%;
+    border-radius: 10px;
+    position: relative;
+    width: calc(100% - 100px);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    object-position: 50% 50%;
+    object-fit:cover;
+}
+
+@media screen and (max-width: 1280px) {
+    
+    .show_container {
+        display: grid;
+        position: relative;
+        grid-template-columns: 100%;
+        grid-template-rows: 75px 675px auto auto;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "show-title"
+            "show-thumbnail"
+            "show-description"
+            "show-episodes";
+    }
+
+    .container {
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    position: relative;
+
+    /* Generated Code */
+    display: grid;
+    grid-template-columns: 280px 280px 1fr 400px;
+    grid-template-rows: 125px 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "top-bar top-bar top-bar top-bar"
+        "content-panel content-panel gap right-panel";
+}
 
 }

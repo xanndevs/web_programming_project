@@ -10,12 +10,34 @@
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     <script>
         function codeAddress() {
-            htmlString = document.getElementById("main").innerHTML;
 
+            /*
+                gets the data from flask
+                converts &lt; &gt; to '<' and '>'
+
+                adds the compiled html structure to the main
+            */
+            htmlString = document.getElementById("main").innerHTML;
             htmlString = htmlString.replace(/&lt;/g, '<');
             htmlString = htmlString.replace(/&gt;/g, '>');
 
             document.getElementById("main").innerHTML = htmlString;
+
+            /*
+                This part of the code will only produce meaningful values when it ran on '/' or '/index/'
+                
+                it is goint to generate onclick fucntions for each 'show-container' div
+
+                when clicked, code will redirect us from index to /shows/<show_id> page
+            */
+            shows = document.getElementsByClassName("show-container");
+            showsArray = [...shows];
+            showsArray.forEach(elem => {
+                elem.onclick = function () {
+                    window.location.href = {{ url_for('show_page') }} + encodeURIComponent(elem.dataset.showId);
+            }   
+            });
+
         }
         window.onload = codeAddress;
     </script>
@@ -54,11 +76,13 @@
                 {{ content }}
             </main>
         </div>
+        <div class="gap"></div>
         <div class="right-panel"></div>
     </div>
 
     <script src="{{ url_for('static', filename='js/add-episode-searchabledropdown.js') }}"></script>
-
+    <script>
+    </script>
 
 </body>
 

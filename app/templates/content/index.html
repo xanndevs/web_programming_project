@@ -1,0 +1,7 @@
+{% for id, data_list in content.items() %}
+<div class="show-container" data-show-id="{{ id }}">
+    <img src="{{ url_for('uploaded_file') }}{{data_list[1]}}" alt="">
+    <p>{{ data_list[0] }}</p>
+</div>
+{% endfor %}
+
