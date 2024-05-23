@@ -15,8 +15,8 @@ class Show(db.Model):
     __tablename__ = 'show'
     
     id = db.Column(db.Integer, primary_key=True)
-    show_name = db.Column(db.String, nullable=False)
-    show_description = db.Column(db.String, nullable=True)
+    title = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=True)
     show_thumbnail= db.Column(db.String, nullable=True)
     episode = db.relationship('Episode', backref='show', lazy=True)
 

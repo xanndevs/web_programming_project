@@ -26,24 +26,48 @@ def allowed_video(filename):
 @app.route('/index')
 def index():
     shows = Show.query.all()
-    shows_dict = {show.id: show.show_name for show in shows}
-    all_dict = {show.id: [show.show_name, show.show_thumbnail, show.show_description] for show in shows}
+    shows_dict = {show.id: show.title for show in shows}
+    all_dict = {show.id: [show.title, show.show_thumbnail, show.description] for show in shows}
+
+    right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
     main_page = render_template('content/index.html', content=all_dict)
-    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_page)
+    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_page, right_panel=right_panel_html)
 
 
 @app.route("/show/", methods=["GET", "POST"])
 @app.route("/show/<show_id>", methods=["GET", "POST"])
 def show_page(show_id):
+    ##Autofill data
     shows = Show.query.all()
-    shows_dict = {show.id: show.show_name for show in shows}
-
+    shows_dict = {show.id: show.title for show in shows}
+    
+    ##Current show
     show_data = db.session.query(Show).filter(Show.id == show_id).first()
-    print(show_id, file=sys.stderr)
+    
+    ##Episodes list
+    episode_data = db.session.query(Episode).filter(Episode.show_id == show_id)
+
+    right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
+    main_html = render_template('content/show_info.html', show_data=show_data, episode_data=episode_data)
+    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html, right_panel=right_panel_html)
 
 
-    main_html = render_template('content/show_info.html', data_list=show_data)
-    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html)
+@app.route("/watch/", methods=["GET", "POST"])
+@app.route("/watch/<episode_id>", methods=["GET", "POST"])
+def episode_page(episode_id):
+    ##Autofill data
+    shows = Show.query.all()
+    shows_dict = {show.id: show.title for show in shows}
+    
+    ##Episodes list
+    current_episode = db.session.query(Episode).filter(Episode.id == episode_id).first()
+    current_show_id = db.session.query(Show).filter(Show.id == current_episode.show_id).first().id
+
+    episode_data = db.session.query(Episode).filter(Episode.show_id == current_show_id)
+    
+    right_panel_html = render_template('content/right_panel_list.html', show_data=episode_data)
+    main_html = render_template('content/episode_info.html', current_episode=current_episode, episode_data=episode_data)
+    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html, right_panel=right_panel_html)
 
 
 
@@ -98,8 +122,8 @@ def add_show():
 
         # Commit the values to the DB.
         new_show = Show(
-            show_name = form_data.get("title"),
-            show_description = form_data.get("description"),
+            title = form_data.get("title"),
+            description = form_data.get("description"),
             show_thumbnail = new_filename
         )
         db.session.add(new_show)
@@ -125,7 +149,7 @@ def uploaded_file(filename):
 def add_episode():
     if request.method == 'POST':
         shows = Show.query.all()
-        shows_dict = {show.id: show.show_name for show in shows}
+        shows_dict = {show.id: show.title for show in shows}
 
         form_data = request.form
         files = request.files.getlist("video")
@@ -155,6 +179,6 @@ def add_episode():
         return "Episode have been successfully uploaded!"
     else:
         shows = Show.query.all()
-        shows_dict = {show.id: show.show_name for show in shows}
+        shows_dict = {show.id: show.title for show in shows}
         return render_template('add-episode.html', title='Add Episode', autofill_data=shows_dict)
 

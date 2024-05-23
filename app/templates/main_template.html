@@ -9,24 +9,31 @@
     <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     <script>
+        function htmlFixer(htmlString){
+            newString = htmlString;
+            newString = newString.replace(/&lt;/g, '<');
+            newString = newString.replace(/&gt;/g, '>');
+            return newString
+        }
+
         function codeAddress() {
 
+            document.getElementsByClassName("logo")[0].onclick = function () {
+                    window.location.href = "{{ url_for('index') }}";
+            }   
             /*
                 gets the data from flask
                 converts &lt; &gt; to '<' and '>'
 
                 adds the compiled html structure to the main
             */
-            htmlString = document.getElementById("main").innerHTML;
-            htmlString = htmlString.replace(/&lt;/g, '<');
-            htmlString = htmlString.replace(/&gt;/g, '>');
-
-            document.getElementById("main").innerHTML = htmlString;
+            document.getElementById("main").innerHTML = htmlFixer(document.getElementById("main").innerHTML);
+            document.getElementById("right-panel").innerHTML = htmlFixer(document.getElementById("right-panel").innerHTML);
 
             /*
                 This part of the code will only produce meaningful values when it ran on '/' or '/index/'
                 
-                it is goint to generate onclick fucntions for each 'show-container' div
+                it is goint to generate onclick functions for each 'show-container' div
 
                 when clicked, code will redirect us from index to /shows/<show_id> page
             */
@@ -34,9 +41,27 @@
             showsArray = [...shows];
             showsArray.forEach(elem => {
                 elem.onclick = function () {
-                    window.location.href = {{ url_for('show_page') }} + encodeURIComponent(elem.dataset.showId);
+                    window.location.href = "{{ url_for('show_page') }}" + encodeURIComponent(elem.dataset.showId);
             }   
             });
+
+
+
+            /*
+                This part of the code will only produce meaningful values when it ran on '/show/<show_id>'
+                
+                it is goint to generate onclick functions for each 'episode-container' div
+
+                when clicked, code will redirect us from index to /watch/<watch_id> page
+            */
+            episodes = document.getElementsByClassName("episode-container");
+            episodesArray = [...episodes];
+            episodesArray.forEach(elem => {
+                elem.onclick = function () {
+                    window.location.href = "{{ url_for('episode_page') }}" + encodeURIComponent(elem.dataset.episodeId);
+            }   
+            });
+            
 
         }
         window.onload = codeAddress;
@@ -77,7 +102,9 @@
             </main>
         </div>
         <div class="gap"></div>
-        <div class="right-panel"></div>
+        <div id="right-panel" class="right-panel">
+            {{ right_panel }}
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/add-episode-searchabledropdown.js') }}"></script>

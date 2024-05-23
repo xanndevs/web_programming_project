@@ -6,19 +6,22 @@
 <div class="show_container">
     <div class="show-title">
         <p>
-            {{ data_list.show_name }}
+            {{ show_data.title }}
         </p>
     </div>
     <div class="show-thumbnail">
-        <img src="{{ url_for('uploaded_file', filename=data_list.show_thumbnail) }}" alt="Show Thumbnail">
+        <img src="{{ url_for('uploaded_file', filename=show_data.show_thumbnail) }}" alt="Show Thumbnail">
     </div>
     <div class="show-description">
         <p>
-            {{ data_list.show_description }}
+            {{ show_data.description }}
         </p>
     </div>
     <div class="show-episodes">
-
-
+        {% for episode in episode_data %}
+        <div class="episode-container" data-episode-id="{{ episode.id }}">
+            <p>{{ episode.title }}</p>
+        </div>
+        {% endfor %}
     </div>
 </div>
