@@ -75,7 +75,7 @@
     <div class="container">
         <div class="top-bar">
             <div class="logo">
-                <img src="{{ url_for('static', filename='images/normal-logo.png') }}" alt="Logo" style="width:auto;">
+                <img src="{{ url_for('static', filename='images/normal-logo.png') }}" alt="Logo">
             </div>
             <div class="search-bar">
 
@@ -103,7 +103,7 @@
             
             <div class="hamburger-button">
 
-                <div id="hamburger-buttons">
+                <div class="hamburger-menu">
                     <a href="{{ url_for('add_show') }}">addshow</a>
                     <a href="{{ url_for('add_episode') }}">addepisode</a>
                 </div>
@@ -120,6 +120,7 @@
         <div id="right-panel" class="right-panel">
             {% for episode in r_episode_data %}
                 <div class="episode-container" data-episode-id="{{ episode.id }}">
+                    <div class="triangle"></div>
                     <p>{{ episode.title }}</p>
                 </div>
             {% endfor %}

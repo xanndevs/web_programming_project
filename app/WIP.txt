@@ -1,1 +1,3 @@
-anasayfa, video izleme sayfası, anasayfa search-bar (episode ekleden çal)
+maindeki episodeları blok blok diz
+
+video sayfasının cssini düzelt
