@@ -83,6 +83,8 @@
                         {% for id, name in autofill_data.items() %}
                         <option onclick="window.location.href = '{{url_for('show_page',show_id=id)}}'">{{name}}</option>
                         {% endfor %}
+                        <option disabled></option>
+
 
                     </select>
                     <input type="text" id="search" placeholder="Search..." autocomplete="false">
@@ -108,6 +110,8 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/add-episode-searchabledropdown.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/searchable.js') }}"></script>
+
     <script>
     </script>
 

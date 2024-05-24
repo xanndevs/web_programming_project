@@ -101,6 +101,7 @@ def episode_page(episode_id):
 
 @app.route("/add-show", methods=["GET", "POST"])
 def add_show():
+    page_info = ""
     if request.method == 'POST':
 
         form_data = request.form
@@ -128,11 +129,16 @@ def add_show():
         )
         db.session.add(new_show)
         db.session.commit()
+        page_info = "Show added to the database"
 
-  
-        return "Show have been successfully added!"
-    else:
-        return render_template('add-show.html', title='Home', content="AZAAAAAAAAAAAAAA", videoID="jvid")
+
+    ##Autofill data
+    shows = Show.query.all()
+    shows_dict = {show.id: show.title for show in shows}
+
+    right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
+    main_html = render_template('add-show.html', page_info=page_info)
+    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html, right_panel=right_panel_html)
 
 @app.route('/uploads/')
 @app.route('/uploads/<filename>')
@@ -147,10 +153,13 @@ def uploaded_file(filename):
 
 @app.route("/add-episode", methods=["GET", "POST"])
 def add_episode():
-    if request.method == 'POST':
-        shows = Show.query.all()
-        shows_dict = {show.id: show.title for show in shows}
+    page_info = ""
 
+    ##Autofill data
+    shows = Show.query.all()
+    shows_dict = {show.id: show.title for show in shows}
+    
+    if request.method == 'POST':
         form_data = request.form
         files = request.files.getlist("video")
 
@@ -176,9 +185,10 @@ def add_episode():
         db.session.add(new_episode)
         db.session.commit()
 
-        return "Episode have been successfully uploaded!"
-    else:
-        shows = Show.query.all()
-        shows_dict = {show.id: show.title for show in shows}
-        return render_template('add-episode.html', title='Add Episode', autofill_data=shows_dict)
+        page_info = "Episode added to the database"
+
+
+    right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
+    main_html = render_template('add-episode.html', autofill_data=shows_dict, page_info=page_info)
+    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html, right_panel=right_panel_html)
 
