@@ -65,7 +65,7 @@ def episode_page(episode_id):
 
     episode_data = db.session.query(Episode).filter(Episode.show_id == current_show_id)
     
-    right_panel_html = render_template('content/right_panel_list.html', show_data=episode_data)
+    right_panel_html = render_template('content/right_panel_list.html', episode_data=episode_data)
     main_html = render_template('content/episode_info.html', current_episode=current_episode, episode_data=episode_data)
     return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html, right_panel=right_panel_html)
 
