@@ -13,7 +13,7 @@
             newString = htmlString;
             newString = newString.replace(/&lt;/g, '<');
             newString = newString.replace(/&gt;/g, '>');
-            return newString
+            return htmlString;
         }
 
         function codeAddress() {
@@ -26,10 +26,12 @@
                 converts &lt; &gt; to '<' and '>'
 
                 adds the compiled html structure to the main
+                
+                edit: code removed cuz we started using the proper way of doing this :D
+                document.getElementById("main").innerHTML = htmlFixer(document.getElementById("main").innerHTML);
+                document.getElementById("right-panel").innerHTML = htmlFixer(document.getElementById("right-panel").innerHTML);
             */
-            document.getElementById("main").innerHTML = htmlFixer(document.getElementById("main").innerHTML);
-            document.getElementById("right-panel").innerHTML = htmlFixer(document.getElementById("right-panel").innerHTML);
-
+                
             /*
                 This part of the code will only produce meaningful values when it ran on '/' or '/index/'
                 
@@ -110,12 +112,24 @@
         </div>
         <div class="content-panel">
             <main id="main">
-                {{ content }}
+                {% block content %}
+                {% endblock %}
             </main>
         </div>
         <div class="gap"></div>
         <div id="right-panel" class="right-panel">
-            {{ right_panel }}
+            {% for episode in r_episode_data %}
+                <div class="episode-container" data-episode-id="{{ episode.id }}">
+                    <p>{{ episode.title }}</p>
+                </div>
+            {% endfor %}
+
+            {% for show in r_show_data %}
+                <div class="show-container" data-show-id="{{ show.id }}">
+                    <div class="triangle"></div>
+                    <p>{{ show.title }}</p>
+                </div>
+            {% endfor %}
         </div>
     </div>
 

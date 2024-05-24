@@ -29,9 +29,9 @@ def index():
     shows_dict = {show.id: show.title for show in shows}
     all_dict = {show.id: [show.title, show.show_thumbnail, show.description] for show in shows}
 
-    right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
-    main_page = render_template('content/index.html', content=all_dict)
-    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_page, right_panel=right_panel_html)
+    #right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
+    #main_page = render_template('content/index.html', content=all_dict)
+    return render_template('content/index.html', title='Homepage', autofill_data=shows_dict, content=all_dict, r_show_data=shows)
 
 
 @app.route("/show/", methods=["GET", "POST"])
@@ -47,9 +47,9 @@ def show_page(show_id):
     ##Episodes list
     episode_data = db.session.query(Episode).filter(Episode.show_id == show_id)
 
-    right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
-    main_html = render_template('content/show_info.html', show_data=show_data, episode_data=episode_data)
-    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html, right_panel=right_panel_html)
+    #right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
+    #main_html = render_template('content/show_info.html', show_data=show_data, episode_data=episode_data)
+    return render_template('content/show_info.html', title='Home-Page', autofill_data=shows_dict, show_data=show_data, episode_data=episode_data, r_show_data=shows)
 
 
 @app.route("/watch/", methods=["GET", "POST"])
@@ -65,9 +65,9 @@ def episode_page(episode_id):
 
     episode_data = db.session.query(Episode).filter(Episode.show_id == current_show_id)
     
-    right_panel_html = render_template('content/right_panel_list.html', episode_data=episode_data)
-    main_html = render_template('content/episode_info.html', current_episode=current_episode, episode_data=episode_data)
-    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html, right_panel=right_panel_html)
+    #right_panel_html = render_template('content/right_panel_list.html', episode_data=episode_data)
+    #main_html = render_template('content/episode_info.html', current_episode=current_episode, episode_data=episode_data)
+    return render_template('content/episode_info.html', title='Watch-Page', autofill_data=shows_dict, current_episode=current_episode, r_episode_data=episode_data)
 
 
 
@@ -97,6 +97,10 @@ def episode_page(episode_id):
 
 
 
+@app.route('/uploads/')
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 @app.route("/add-show", methods=["GET", "POST"])
@@ -136,18 +140,9 @@ def add_show():
     shows = Show.query.all()
     shows_dict = {show.id: show.title for show in shows}
 
-    right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
-    main_html = render_template('add-show.html', page_info=page_info)
-    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html, right_panel=right_panel_html)
-
-@app.route('/uploads/')
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
-
-
-
+    #right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
+    #main_html = render_template('add-show.html', page_info=page_info)
+    return render_template('add-show.html', title='Homepage', autofill_data=shows_dict,  page_info=page_info, r_show_data=shows)
 
 
 
@@ -188,7 +183,7 @@ def add_episode():
         page_info = "Episode added to the database"
 
 
-    right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
-    main_html = render_template('add-episode.html', autofill_data=shows_dict, page_info=page_info)
-    return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html, right_panel=right_panel_html)
+    #right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
+    #main_html = render_template('add-episode.html', autofill_data=shows_dict, page_info=page_info)
+    return render_template('add-episode.html', title='Homepage', autofill_data=shows_dict, page_info=page_info, r_show_data=shows)
 

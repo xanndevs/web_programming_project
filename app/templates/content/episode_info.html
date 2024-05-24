@@ -1,3 +1,6 @@
+{% extends 'main_template.html' %}
+
+{% block content %}
 <div class="episode-info">
     <div class="episode-name">
         <button class="prev-episode">
@@ -23,11 +26,14 @@
             {{ current_episode.description }}
         </p>
     </div>
+    <!--
     <div class="show-episodes">
-        {% for episode in episode_data %}
+        {% for episode in r_episode_data %}
         <div class="episode-container" data-episode-id="{{ episode.id }}">
             <p>{{ episode.title }}</p>
         </div>
         {% endfor %}
     </div>
+    -->
 </div>
+{% endblock %}
