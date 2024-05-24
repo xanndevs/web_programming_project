@@ -129,31 +129,7 @@ color: rgb(195, 195, 195);}
     width: auto;
     position: relative;
 }
-.triangle {
-    width: 0px;
-    height: 0px;
-    border-style: solid;
-    border-width: 1lh 0 1lh 1.2lh;
-    border-color: transparent transparent transparent #0a0a0a;
-    transform: rotate(0deg);
-    position: relative;
-    left:-20px;
-    float: left;
- }
- .triangle::before{
-    width: 0px;
-    height: 0px;
-    border-style: solid;
-    border-width: 0.5lh 0 0.5lh 0.6lh;
-    border-color: transparent transparent transparent #141414;
-    transform: rotate(0deg);
-    position: relative;
-    left:-20px;
-    top: calc(-0.5lh - 0lh);
-    float: left;
 
-    content: "";
- }
 
 
 /* Searchable Styling */
@@ -307,7 +283,7 @@ select{
 }
 
 .show-description > p{
-    padding: 0px 30px;
+    padding: 0px 50px 0px 30px;
     word-wrap:break-word;
     white-space: pre-line;
     
@@ -337,7 +313,7 @@ select{
     height: 100%;
     border-radius: 10px;
     position: relative;
-    width: calc(100% - 60px);
+    width: 500px;
     margin-left: 30px;
     object-position: 50% 50%;
     object-fit:cover;
@@ -392,12 +368,12 @@ select{
     transform: scale(1.1);
 }
 
-.right-panel > .show-container{
+.right-panel > .show-container, .right-panel > .episode-container{
     height: 2lh;
     width: 100%;
     padding: 10px 20px;
     margin-bottom: 5px;
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(15, 15, 15);
     vertical-align: top;
     >p{
         color: #aaaaaa;
@@ -409,18 +385,46 @@ select{
     }
     border-radius: 10px;
 }
-.right-panel > .show-container:nth-child(2n){
-    background-color: rgb(30, 30, 30);
+.right-panel > .show-container:nth-child(2n),.right-panel > .episode-container:nth-child(2n){
+    background-color: rgb(23, 23, 23);
 
     .triangle::before{
-        border-color: transparent transparent transparent rgb(30, 30, 30);
+        border-color: transparent transparent transparent rgb(23, 23, 23);
 
     }
 }
 
+
+.triangle {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 1lh 0 1lh 1.2lh;
+    border-color: transparent transparent transparent rgb(10, 10, 10);
+    transform: rotate(0deg);
+    position: relative;
+    left:-20px;
+    float: left;
+ }
+ .triangle::before{
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0.5lh 0 0.5lh 0.6lh;
+    border-color: transparent transparent transparent rgb(15, 15, 15);
+    transform: rotate(0deg);
+    position: relative;
+    left:-20px;
+    top: calc(-0.5lh - 0lh);
+    float: left;
+
+    content: "";
+ }
+
+
 @media screen and (max-width: 1280px) {
     
-    .show_container {
+    .show_container{
         display: grid;
         position: relative;
         grid-template-columns: 100%;
@@ -483,16 +487,28 @@ select{
     /* Generated Code */
     display: grid;
     grid-template-columns: 100cqw;
-    grid-template-rows: 125px 1fr;
+    grid-template-rows: 125px 1fr auto;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
         "top-bar"
-        "content-panel";
+        "content-panel"
+        "right-panel";
 }
 
-    .gap, .right-panel{
+    .gap{
         display: none;
+    }
+    .content-panel{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #main{
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
 
@@ -505,8 +521,8 @@ select{
     }
 
     .show-thumbnail img{
-            margin: 0 2%;
-            width: 100%;
+            margin: 0 5%;
+            width: 95%;
             position: relative;
             min-width: unset;
             min-height: unset;        
@@ -515,7 +531,8 @@ select{
             }
 
     .show-title p{
-        font-size: 2.5vw;
+        text-align: center;
+        font-size: clamp(1rem,4.5vw ,2rem);
     }
 
 
