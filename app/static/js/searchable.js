@@ -24,7 +24,7 @@ $(document).ready(function () {
                 if(!$(this).is(":disabled"))$(this).hide();
             }
         });
-        if(counter == 1)counter++;
+        if(counter <= 1)counter = 2;
         if(counter > 10)counter = 10;
         $('#dropdown-add').attr('size', counter);
     });

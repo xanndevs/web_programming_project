@@ -26,7 +26,8 @@ $(document).ready(function () {
             }
         });
 
-        if(counter == 1)counter++;
+        
+        if(counter <= 1)counter = 2;
         if(counter > 10)counter = 10;
         $('#dropdown').attr('size', counter);
     });
