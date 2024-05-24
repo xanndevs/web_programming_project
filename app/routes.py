@@ -64,9 +64,13 @@ def episode_page(episode_id):
     current_show_id = db.session.query(Show).filter(Show.id == current_episode.show_id).first().id
 
     episode_data = db.session.query(Episode).filter(Episode.show_id == current_show_id)
+    episodes = [episode.id for episode in episode_data]
+
+    prevep = episode_data.first()
+    nextep = episode_data.first()
     
     right_panel_html = render_template('content/right_panel_list.html', episode_data=episode_data)
-    main_html = render_template('content/episode_info.html', current_episode=current_episode, episode_data=episode_data)
+    main_html = render_template('content/episode_info.html', current_episode=current_episode, episode_data=episode_data, prevep=prevep, nextep=nextep)
     return render_template('main_template.html', title='Homepage', autofill_data=shows_dict, content=main_html, right_panel=right_panel_html)
 
 
