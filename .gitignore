@@ -3,18 +3,16 @@
 __pycache__/
 
 # Virtual environment folder#
-venv/
+
 
 # Environment variables file
-.env
 #.flaskenv
 
 # Database files
-*.db
+
 *.sqlite3
 
 # Flask-Migrate migration files
-migrations/
 
 # Pytest cache
 .pytest_cache/
@@ -28,5 +26,3 @@ migrations/
 
 # Logs
 *.log
-
-uploads/*
