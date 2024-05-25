@@ -118,8 +118,6 @@ color: rgb(195, 195, 195);}
 
 /* Main Layout Styling */
 
-.content-panel {
-}
 
 .search-bar {
     background-color: transparent;
@@ -257,15 +255,7 @@ option:checked{
 }
 
 
-
-
-
-
-
-
-
 /* Show details page styling */
-
 
 
 .show_container {
@@ -519,7 +509,7 @@ option:checked{
     grid-template-areas:
         "top-bar top-bar top-bar top-bar"
         "content-panel content-panel gap right-panel";
-}
+    }
 
 
 
@@ -545,22 +535,22 @@ option:checked{
     .container {
         margin-left: 50%;
         transform: translateX(-50%);
-    min-height: 100%;
-    height: auto;
-    position: relative;
-    width: 100%;
+        min-height: 100%;
+        height: auto;
+        position: relative;
+        width: 100%;
 
-    /* Generated Code */
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 125px 1fr auto;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "top-bar"
-        "content-panel"
-        "right-panel";
-}
+        /* Generated Code */
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 125px 1fr auto;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "top-bar"
+            "content-panel"
+            "right-panel";
+    }
 
     .gap{
         display: none;
