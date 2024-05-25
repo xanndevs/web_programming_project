@@ -49,7 +49,7 @@ def show_page(show_id):
 
     #right_panel_html = render_template('content/right_panel_list.html', show_data=shows)
     #main_html = render_template('content/show_info.html', show_data=show_data, episode_data=episode_data)
-    return render_template('content/show_info.html', title='Home-Page', autofill_data=shows_dict, show_data=show_data, episode_data=episode_data, r_show_data=shows)
+    return render_template('content/show_info.html', title='Home-Page', autofill_data=shows_dict, show_data=show_data, episode_data=episode_data, r_episode_data=episode_data)
 
 
 @app.route("/watch/", methods=["GET", "POST"])
