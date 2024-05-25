@@ -9,29 +9,12 @@
     <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     <script>
-        function htmlFixer(htmlString){
-            newString = htmlString;
-            newString = newString.replace(/&lt;/g, '<');
-            newString = newString.replace(/&gt;/g, '>');
-            return htmlString;
-        }
-
         function codeAddress() {
 
             document.getElementsByClassName("logo")[0].onclick = function () {
                     window.location.href = "{{ url_for('index') }}";
             }   
-            /*
-                gets the data from flask
-                converts &lt; &gt; to '<' and '>'
 
-                adds the compiled html structure to the main
-                
-                edit: code removed cuz we started using the proper way of doing this :D
-                document.getElementById("main").innerHTML = htmlFixer(document.getElementById("main").innerHTML);
-                document.getElementById("right-panel").innerHTML = htmlFixer(document.getElementById("right-panel").innerHTML);
-            */
-                
             /*
                 This part of the code will only produce meaningful values when it ran on '/' or '/index/'
                 

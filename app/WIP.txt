@@ -1,3 +1,0 @@
-maindeki episodeları blok blok diz
-
-video sayfasının cssini düzelt
