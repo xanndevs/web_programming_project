@@ -141,7 +141,7 @@ color: rgb(195, 195, 195);}
 
 .logo img:active{
     filter: brightness(0.6);
-    transform: scale(0.95);
+    transform: scale(0.95); 
 }
 
 
@@ -250,6 +250,10 @@ select{
     padding: 0;
     font-size: 0;
     height: 0;
+}
+
+option:checked{
+    background-color: #171717 !important;
 }
 
 
@@ -635,9 +639,6 @@ select{
     }
 
     .dropdown-searchable{
-        >select,input{
-            
-        }
         width: 100%;
         min-width: unset;
         max-width: unset;
@@ -686,6 +687,10 @@ select{
         transform: translateX(-50%);
         width: auto;
         position: relative;
+    }
+
+    .logo img:active{
+        transform: scale(0.95) translateX(-50%);
     }
 }
 
