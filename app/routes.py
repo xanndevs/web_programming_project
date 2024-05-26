@@ -129,6 +129,52 @@ def add_episode():
     return render_template('add-episode.html', title='Homepage', autofill_data=shows_dict, page_info=page_info, r_show_data=shows)
 
 
+
+@app.route("/delete-show/<show_id>", methods=["GET", "POST"])
+def delete_show(show_id):
+    
+    show_querry = db.session.query(Show).filter(Show.id == show_id)
+    show = show_querry.first()
+
+    for episode in db.session.query(Episode).filter(Episode.show_id == show_id):
+        delete_episode(episode.id)
+
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], show.show_thumbnail)
+    try:
+        if os.path.exists(filepath):
+            os.remove(filepath)
+        else:
+            return show_page(show_id)
+    except:
+        pass
+
+    show_querry.delete()
+    db.session.commit()
+    return index()
+
+
+
+@app.route("/delete-episode/<episode_id>", methods=["GET", "POST"])
+def delete_episode(episode_id):
+    
+    episode_querry = db.session.query(Episode).filter(Episode.id == episode_id)
+    episode = episode_querry.first()
+    show_id = episode.show_id
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], episode.episode_video)
+    try:
+        if os.path.exists(filepath):
+            os.remove(filepath)
+        else:
+            return episode_page(episode.id)
+    except:
+        pass
+    episode_querry.delete()
+    db.session.commit()
+
+    return show_page(show_id)
+
+
+
 ##Helper Functions
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']

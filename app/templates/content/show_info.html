@@ -4,6 +4,11 @@
 {% block content %}
 <div class="show_container">
     <div class="show-title">
+        <a href="{{ url_for('delete_show', show_id=show_data.id) }}">
+            <button>
+                Delete
+            </button>
+        </a>
         <p>
             {{ show_data.title }}
         </p>
