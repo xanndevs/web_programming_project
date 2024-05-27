@@ -4,14 +4,14 @@
 {% block content %}
 <div class="show_container">
     <div class="show-title">
+        <p>
+            {{ show_data.title }}
+        </p>
         <a href="{{ url_for('delete_show', show_id=show_data.id) }}">
             <button>
                 Delete
             </button>
         </a>
-        <p>
-            {{ show_data.title }}
-        </p>
     </div>
     <div class="show-thumbnail">
         <img src="{{ url_for('uploaded_file', filename=show_data.show_thumbnail) }}" alt="Show Thumbnail">
@@ -19,6 +19,9 @@
     <div class="show-description">
         <p>
             {{ show_data.description }}
+        </p>
+        <p style="opacity: none;user-select: none; color:transparent;">
+            -----------------------------------------------------------------------------------------------------
         </p>
     </div>
 </div>

@@ -3,15 +3,15 @@
 __pycache__/
 
 # Virtual environment folder#
-venv/
+venv/*
 
 # Environment variables file
 .env
-#.flaskenv
 
 # Database files
 *.db
 *.sqlite3
+
 # Flask SQL Alchemy Database folder
 instances/
 
