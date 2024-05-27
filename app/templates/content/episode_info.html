@@ -3,14 +3,14 @@
 {% block content %}
 <div class="episode-info">
     <div class="episode-name">
+        <p>
+            {{ current_episode.title }}
+        </p>
         <a href="{{ url_for('delete_episode', episode_id=current_episode.id) }}">
             <button>
                 Delete
             </button>
         </a>
-        <p>
-            {{ current_episode.title }}
-        </p>
     </div>
     <div class="episode-video">
         <!--<video src="{{ url_for('uploaded_file', filename=current_episode.episode_video) }}" alt="Show Thumbnail">-->
