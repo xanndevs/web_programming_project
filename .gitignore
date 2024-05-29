@@ -17,6 +17,3 @@ venv/
 
 # Logs
 *.log
-
-# Uploads folder
-uploads/*
