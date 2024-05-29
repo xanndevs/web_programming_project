@@ -702,14 +702,22 @@ option:checked{
         }
         width: auto;
     }
-    .show-title p{
-        text-align: center;
-        text-indent: 0px;
+    .show-title{
+        p{
+            text-align: center;
+            text-indent: 0px;
+            height: auto;
+            word-break: break-all;
+            word-wrap: break-word;
+            margin-bottom: 5px;
+            width: calc(100% - 90px);
+            padding: 0px 20px;
+            font-size:25px;
+        }
+        a{
+            display: none;
+        }
         height: auto;
-        margin-bottom: 5px;
-        width: calc(100% - 40px);
-        padding: 0px 20px;
-        font-size:25px;
     }
     .triangle, .search-bar, .hamburger-button{
         display: none;
@@ -747,6 +755,7 @@ option:checked{
         width: 100%;
         .episode-name>p{
             text-align: center;
+            width: calc(100% - 40px);
         }
         .episode-description>p{
             padding: 0px 20px;
@@ -755,6 +764,11 @@ option:checked{
             width: calc(100% - 20px);
             padding: 0px 10px;
             height: auto;
+        }
+        a{
+            width: 0px;
+            min-width: 0px;
+            display: none;
         }
     }
     .logo img {
