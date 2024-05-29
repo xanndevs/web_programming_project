@@ -1,9 +1,17 @@
-<p align="center"><img src="https://raw.githubusercontent.com/xanndevs/web_programming_project/29aeeadd62a81a0125a871e05c0532203fb22bea/app/static/images/mobile-logo.png" width="200" ></p>
-<h1 align="center" style="border:none; font-size:25px">Video Streaming & Uploading Platform</h1>
+<p align="center"><img src="https://raw.githubusercontent.com/xanndevs/web_programming_project/29aeeadd62a81a0125a871e05c0532203fb22bea/app/static/images/mobile-logo.png" width="250" ></p>
+<h1 align="center" style="border:none; font-size:30px">Video Streaming & Uploading Platform</h1>
 
 ## Introduction
 - **Objective:** Develop a web application using Flask, a lightweight Python web framework, for managing and displaying TV shows and their episodes.
+
 - **Key Features:** User-friendly interface for adding, deleting and viewing shows and episodes, with support for uploading thumbnails and videos.
+
+## Project Work Distrubution
+- **Can Berk ÇAKIR:** Backend/Connections with databases/Routing and Route design
+
+- **Efla YILMAZ:** Frontend/Transferring designs to the frontend.
+
+- **Ekim ÖNCEL:** Complete site design. Selecting the technologies to be used.
 
 ## Installation
 Enter those lines to your terminal and you should be good to go.
@@ -62,26 +70,35 @@ python main.py
   - Users can add new shows via a web form.
 
   - Support for uploading show titles, descriptions and thumbnails.
-  <p><img src="https://raw.githubusercontent.com/xanndevs/web_programming_project/29aeeadd62a81a0125a871e05c0532203fb22bea/app/static/images/mobile-logo.png" width="200" ></p>
+  <p><img src="https://raw.githubusercontent.com/xanndevs/web_programming_project/main/readme/addshow.png" width="100%" ></p>
 
 - **Adding Episodes:**
   - Again users can add new episodes via a web form.
 
   - Support for uploading episode titles, descriptions, videos.
-  <p><img src="https://raw.githubusercontent.com/xanndevs/web_programming_project/29aeeadd62a81a0125a871e05c0532203fb22bea/app/static/images/mobile-logo.png" width="200" ></p>
+  <p><img src="https://raw.githubusercontent.com/xanndevs/web_programming_project/main/readme/addepisode.png" width="100%" ></p>
 
 - **Viewing Show Details and Episodes:**
   - Users can view details of each show, including its description and associated episodes.
 
   - Episodes can be watched directly from the web application.
-  <p><img src="https://raw.githubusercontent.com/xanndevs/web_programming_project/29aeeadd62a81a0125a871e05c0532203fb22bea/app/static/images/mobile-logo.png" width="200" ></p>
+  <p><img src="https://raw.githubusercontent.com/xanndevs/web_programming_project/main/readme/showpage.png" width="100%" ></p>
+  <p><img src="https://raw.githubusercontent.com/xanndevs/web_programming_project/main/readme/episodepage.png" width="100%" ></p>
 
 - **Deleting Shows:**
   - Users can delete shows with a single click (which is a bad idea if the app is gonna be global).
 
   - Deleting a show also deletes all the episodes inside of the show.
-  <p><img src="https://raw.githubusercontent.com/xanndevs/web_programming_project/29aeeadd62a81a0125a871e05c0532203fb22bea/app/static/images/mobile-logo.png" width="200" ></p>
 
-  - **Deleting Episodes:**
+- **Deleting Episodes:**
   - Users can delete episodes with a single click.
-  <p><img src="https://raw.githubusercontent.com/xanndevs/web_programming_project/29aeeadd62a81a0125a871e05c0532203fb22bea/app/static/images/mobile-logo.png" width="200" ></p>
+
+- **Home Page:**
+  - Users can search for shows from the task bar and easily find the show they are searching for
+
+  - Users can navigate to `Show Adding` and `Episode Adding` pages
+
+  - All shows are listed with their thumbnails.
+
+  <p><img src="https://raw.githubusercontent.com/xanndevs/web_programming_project/main/readme/homepage.png" width="100%" ></p>
+  
